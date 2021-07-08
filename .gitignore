@@ -1,0 +1,12 @@
+/.vscode
+/Circle.o
+/Color.o
+/Line2D.o
+/Screen.o
+/ScreenBuffer.o
+/Shape.o
+/Triangle.o
+/Utils.o
+/Vec2D.o
+/exec
+/main.o
