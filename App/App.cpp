@@ -1,10 +1,13 @@
 #include "App.h"
 #include <SDL2/SDL.h>
+#include "iostream"
 #include "Line2D.h"
 #include "Triangle.h"
 #include "AARectangle.h"
 #include "Circle.h"
 #include "Color.h"
+
+using namespace std;
 
 
 App& App::Singleton()
@@ -27,19 +30,35 @@ void App::Run()
         AARectangle rect = {Vec2D(10, 70), Vec2D(120, 120)};
         Circle circle = {Vec2D(150, 150), 50.0f};
         // screen.Draw(line, Color::White());
-        aScreen.Draw(trngl, Color::Green(), true, Color::Green());
-        aScreen.Draw(rect, Color::Blue(), true, Color::Blue());
-        aScreen.Draw(circle, Color(0, 255, 0, 0), true, Color(0, 255, 0, 0));
+
 
         
-        aScreen.SwapScreens();
 
 
         SDL_Event event;
         bool running = true;
 
+        uint32_t lastTick = SDL_GetTicks();
+        uint32_t currentTick = lastTick;
+
+        uint32_t dt = 10;
+        uint32_t accumulator = 0;
+
         while(running)
         {
+
+            currentTick = SDL_GetTicks();
+            uint32_t frameTime = currentTick - lastTick;
+
+            if(frameTime > 300){
+                frameTime = 300;
+            }
+
+            lastTick = currentTick;
+
+            accumulator += frameTime;
+
+            // Input
             while(SDL_PollEvent(&event))
             {
                 switch (event.type)
@@ -49,6 +68,22 @@ void App::Run()
                     break;
                 }
             }
+
+            // Update state
+            while(accumulator >= dt)
+            {
+                // update current scene by dt
+                cout << "Delta time step: " <<dt << endl;
+                accumulator -= dt;
+            }
+
+            // Render
+            aScreen.Draw(trngl, Color::Green(), true, Color::Green());
+            aScreen.Draw(rect, Color::Blue(), true, Color::Blue());
+            aScreen.Draw(circle, Color(0, 255, 0, 0), true, Color(0, 255, 0, 0));
+
+            aScreen.SwapScreens();
+            
         }
     }
     
