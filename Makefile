@@ -1,10 +1,10 @@
-include_libs = -I/home/shubham/Desktop/COP_Task2_MI/Utils -I/home/shubham/Desktop/COP_Task2_MI/Graphics -I/home/shubham/Desktop/COP_Task2_MI/Shapes
+include_libs = -I/home/shubham/Desktop/COP_Task2_MI/Utils -I/home/shubham/Desktop/COP_Task2_MI/Graphics -I/home/shubham/Desktop/COP_Task2_MI/Shapes -I/home/shubham/Desktop/COP_Task2_MI/App
 
 LINKER_FLAGS = -lSDL2
 
 OBJ_NAME = exec
 
-main_objects = Vec2D.o Utils.o Color.o ScreenBuffer.o Screen.o Line2D.o Shape.o Triangle.o AARectangle.o Circle.o main.o
+main_objects = Vec2D.o Utils.o Color.o ScreenBuffer.o Screen.o Line2D.o Shape.o Triangle.o AARectangle.o Circle.o App.o main.o
 
 
 all : $(main_objects)
@@ -19,6 +19,9 @@ clean:
 
 main.o: main.cpp
 	g++ $(include_libs) -c main.cpp
+
+App.o: App/App.cpp
+	g++ $(include_libs) -c App/App.cpp
 
 Vec2D.o: Utils/Vec2D.cpp
 	g++ $(include_libs) -c Utils/Vec2D.cpp
