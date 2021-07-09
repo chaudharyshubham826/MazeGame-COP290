@@ -1,11 +1,9 @@
 #include "App.h"
 #include <SDL2/SDL.h>
 #include "iostream"
-#include "Line2D.h"
-#include "Triangle.h"
-#include "AARectangle.h"
-#include "Circle.h"
-#include "Color.h"
+#include "MainScene.h"
+
+#include <memory>
 
 using namespace std;
 
@@ -25,10 +23,7 @@ bool App::Init(uint32_t width, uint32_t height, uint32_t mag)
 void App::Run()
 {
     if(aWindow){
-        Line2D line = {Vec2D(0, 0), Vec2D(aScreen.Width(), aScreen.Height())};
-        Triangle trngl = {Vec2D(60, 10), Vec2D(10, 60), Vec2D(110, 60)};
-        AARectangle rect = {Vec2D(10, 70), Vec2D(120, 120)};
-        Circle circle = {Vec2D(150, 150), 50.0f};
+        
         // screen.Draw(line, Color::White());
 
 
@@ -43,6 +38,10 @@ void App::Run()
 
         uint32_t dt = 10;
         uint32_t accumulator = 0;
+
+        std::unique_ptr<MainScene> mainScene = std::make_unique<MainScene>();
+
+        mainScene->Init();
 
         while(running)
         {
@@ -73,14 +72,13 @@ void App::Run()
             while(accumulator >= dt)
             {
                 // update current scene by dt
+                mainScene->Update(dt);
                 cout << "Delta time step: " <<dt << endl;
                 accumulator -= dt;
             }
 
             // Render
-            aScreen.Draw(trngl, Color::Green(), true, Color::Green());
-            aScreen.Draw(rect, Color::Blue(), true, Color::Blue());
-            aScreen.Draw(circle, Color(0, 255, 0, 0), true, Color(0, 255, 0, 0));
+            mainScene->Draw(aScreen);
 
             aScreen.SwapScreens();
             
