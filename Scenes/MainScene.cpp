@@ -5,6 +5,8 @@
 #include "AARectangle.h"
 #include "Circle.h"
 #include "Color.h"
+#include "GameController.h"
+#include <iostream>
 
 MainScene::MainScene()
 {
@@ -13,7 +15,34 @@ MainScene::MainScene()
 
 void MainScene::Init()
 {
+    ButtonAction action;
+    action.key = GameController::ActionKey();
+    action.action = [](uint32_t dt, InputState state)
+    {
+        if(GameController::IsPressed(state))
+        {
+            std::cout << "Action button was pressed!" << std::endl;
+        }
+    };
 
+    aGameController.AddInputActionForKey(action);
+
+    MouseButtonAction mouseAction;
+    mouseAction.mouseButton = GameController::LeftMouseButton();
+
+    mouseAction.mouseInputAction = [](InputState state, const MousePosition& position)
+    {
+        if(GameController::IsPressed(state))
+        {
+            std::cout << "Left mouse button pressed!" <<std::endl;
+        }
+    };
+
+    aGameController.AddMouseButtonAction(mouseAction);
+
+    aGameController.SetMouseMovedAction([](const MousePosition& mousePosition){
+		std::cout << "Mouse position x: " << mousePosition.xPos << ", y: " << mousePosition.yPos << std::endl;
+	});
 }
 
 void MainScene::Update(uint32_t dt)
@@ -34,7 +63,8 @@ void MainScene::Draw(Screen& screen)
 
 const std::string& MainScene::GetSceneName() const
 {
-    return "Games";
+    static std::string sceneName = "Games";
+    return sceneName;
 }
 
 std::unique_ptr<Scene> MainScene::GetScene(eGame game)

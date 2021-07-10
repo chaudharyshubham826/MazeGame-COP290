@@ -3,6 +3,10 @@
 
 #include "Screen.h"
 #include <stdint.h>
+#include <vector>
+#include <memory>
+#include "Scene.h"
+#include "InputController.h"
 
 struct SDL_Window;
 
@@ -16,9 +20,16 @@ public:
     inline uint32_t Width() const {return aScreen.Width();}
     inline uint32_t Height() const {return aScreen.Height();}
 
+    void PushScene(std::unique_ptr<Scene> scene);
+    void PopScene();
+    Scene* TopScene();
+
 private:
     Screen aScreen;
     SDL_Window* aWindow;
+
+    std::vector<std::unique_ptr<Scene>> aSceneStack;////////////////////////////
+    InputController aInputController;
 };
 
 

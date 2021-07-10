@@ -2,8 +2,7 @@
 #include <SDL2/SDL.h>
 #include "iostream"
 #include "MainScene.h"
-
-#include <memory>
+#include <cassert>
 
 using namespace std;
 
@@ -17,6 +16,11 @@ App& App::Singleton()
 bool App::Init(uint32_t width, uint32_t height, uint32_t mag)
 {
     aWindow = aScreen.Init(width, height, mag);
+
+    std::unique_ptr<MainScene> mainScene = std::make_unique<MainScene>();
+
+    PushScene(std::move(mainScene));
+
     return aWindow != nullptr;
 }
 
@@ -26,11 +30,6 @@ void App::Run()
         
         // screen.Draw(line, Color::White());
 
-
-        
-
-
-        SDL_Event event;
         bool running = true;
 
         uint32_t lastTick = SDL_GetTicks();
@@ -39,9 +38,9 @@ void App::Run()
         uint32_t dt = 10;
         uint32_t accumulator = 0;
 
-        std::unique_ptr<MainScene> mainScene = std::make_unique<MainScene>();
-
-        mainScene->Init();
+        aInputController.Init([&running](uint32_t dt, InputState state){
+            running = false;
+        });
 
         while(running)
         {
@@ -58,31 +57,66 @@ void App::Run()
             accumulator += frameTime;
 
             // Input
-            while(SDL_PollEvent(&event))
-            {
-                switch (event.type)
+            aInputController.Update(dt);
+
+            Scene* topScene = App::TopScene();
+            assert(topScene && "where is the scene? what the heck did u do?");
+            if(topScene){
+                // Update state
+                while(accumulator >= dt)
                 {
-                case SDL_QUIT:
-                    running = false;
-                    break;
+                    // update current scene by dt
+                    topScene->Update(dt);
+                    // cout << "Delta time step: " <<dt << endl;
+                    accumulator -= dt;
                 }
+
+                // Render
+                topScene->Draw(aScreen);
             }
 
-            // Update state
-            while(accumulator >= dt)
-            {
-                // update current scene by dt
-                mainScene->Update(dt);
-                cout << "Delta time step: " <<dt << endl;
-                accumulator -= dt;
-            }
+            
+            
 
-            // Render
-            mainScene->Draw(aScreen);
+            
 
             aScreen.SwapScreens();
             
         }
     }
     
+}
+
+void App::PushScene(std::unique_ptr<Scene> scene)
+{
+    assert(scene && "don't push nullptr");
+    if(scene){
+        scene->Init();
+        aInputController.SetGameController(scene->GetGameController());
+        aSceneStack.emplace_back(std::move(scene));////////////L value R value
+        SDL_SetWindowTitle(aWindow, TopScene()->GetSceneName().c_str());
+    }
+}
+
+void App::PopScene()
+{
+    if(aSceneStack.size() >= 1)/////////////
+    {
+        aSceneStack.pop_back();
+    }
+
+    if(TopScene())
+    {
+        aInputController.SetGameController(TopScene()->GetGameController());
+        SDL_SetWindowTitle(aWindow, TopScene()->GetSceneName().c_str());
+    }
+}
+
+Scene* App::TopScene()
+{
+    if(aSceneStack.empty()){
+        return nullptr;
+    }
+
+    return aSceneStack.back().get();
 }
