@@ -6,11 +6,15 @@
 #include "AARectangle.h"
 #include "Circle.h"
 #include "Utils.h"
+#include "BMPImage.h"
+#include "SpriteSheet.h"
+#include "BitmapFont.h"
 
 #include <iostream>
 #include <cassert>
 #include <algorithm>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -224,6 +228,57 @@ void Screen::Draw(const Circle& circle, const Color& color, bool fill, const Col
     {
         Draw(line,color);
     }
+}
+
+void Screen::Draw(const BMPImage& image, const Sprite& sprite, const Vec2D& position, const Color& color)
+{
+    float rVal = static_cast<float>(color.GetRed()) / 255.0f;
+	float gVal = static_cast<float>(color.GetGreen()) / 255.0f;
+	float bVal = static_cast<float>(color.GetBlue()) / 255.0f;
+	float aVal = static_cast<float>(color.GetAlpha()) / 255.0f;
+
+    uint32_t width = sprite.width;
+    uint32_t height = sprite.height;
+
+    for(int r = 0; r < height; r++){
+        for(int c = 0; c < width; c++){
+
+            Color imageColor = image.GetPixels()[GetIndex(image.GetWidth(), r + sprite.yPos, c + sprite.xPos)];
+
+		    Color newColor = {static_cast<uint8_t>( imageColor.GetRed() * rVal), static_cast<uint8_t>(imageColor.GetGreen() * gVal), static_cast<uint8_t>(imageColor.GetBlue() * bVal), static_cast<uint8_t>(imageColor.GetAlpha() * aVal)};
+
+            Draw(position.GetX() + c, position.GetY() + r, newColor);
+        }
+    }
+}
+
+void Screen::Draw(const SpriteSheet& ss, const std::string& spriteName, const Vec2D& pos, const Color& color)
+{
+    Draw(ss.GetBMPImage(), ss.GetSprite(spriteName), pos, color);
+}
+
+void Screen::Draw(const BitmapFont& font, const std::string& textLine, const Vec2D& pos, const Color& color)
+{
+    uint32_t xPos = pos.GetX();
+
+	const SpriteSheet& ss = font.GetSpriteSheet();
+
+	for(char c : textLine)
+	{
+		if(c == ' ')
+		{
+			xPos += font.GetFontSpacingBetweenWords();
+			continue;
+		}
+
+		Sprite sprite = ss.GetSprite(std::string("") + c);
+
+		Draw(ss.GetBMPImage(), sprite, Vec2D(xPos, pos.GetY()), color);
+
+		xPos += sprite.width;
+
+		xPos += font.GetFontSpacingBetweenLetters();
+	}
 }
 
 void Screen::ClearScreen()

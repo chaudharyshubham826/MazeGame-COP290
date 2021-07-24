@@ -1,18 +1,23 @@
 #ifndef GRAPHICS_SCREEN_H
 #define GRAPHICS_SCREEN_H
 
-#include<stdint.h>
+#include <stdint.h>
 #include <vector>
 #include "ScreenBuffer.h"
 #include "Color.h"
+#include <string>
 
 class Vec2D;
 class Line2D;
 class Triangle;
 class AARectangle;
 class Circle;
+class BMPImage;
 struct SDL_Window;
 struct SDL_Surface;
+class SpriteSheet;
+class Sprite;
+class BitmapFont;
 
 
 class Screen{
@@ -35,6 +40,10 @@ public:
     void Draw(const Triangle& trngl, const Color& color, bool fill = false, const Color& fillColor = Color::White());
     void Draw(const AARectangle& rect, const Color& color, bool fill = false, const Color& fillColor = Color::White());
     void Draw(const Circle& circle, const Color& color, bool fill = false, const Color& fillColor = Color::White());
+
+    void Draw(const BMPImage& image, const Sprite& sprite, const Vec2D& position, const Color& color = Color::White());
+    void Draw(const SpriteSheet& ss, const std::string& spriteName, const Vec2D& pos, const Color& color = Color::White());
+    void Draw(const BitmapFont& font, const std::string& textLine, const Vec2D& pos, const Color& color = Color::White());
         
 
 private:

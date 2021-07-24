@@ -3,6 +3,7 @@
 #include "iostream"
 #include "MainScene.h"
 #include <cassert>
+#include "GameScene.h"
 
 using namespace std;
 
@@ -15,6 +16,12 @@ App& App::Singleton()
 
 bool App::Init(uint32_t width, uint32_t height, uint32_t mag)
 {
+    if(!aFont.Load("MainFont"))
+    {
+        cout << "Could not load Main Font!" << endl;
+        return false;
+    }
+
     aWindow = aScreen.Init(width, height, mag);
 
     std::unique_ptr<MainScene> mainScene = std::make_unique<MainScene>();
@@ -119,4 +126,12 @@ Scene* App::TopScene()
     }
 
     return aSceneStack.back().get();
+}
+
+const std::string& App::GetBasePath()
+{
+	static std::string basePath = SDL_GetBasePath();
+    cout << basePath << endl;
+
+	return basePath;
 }

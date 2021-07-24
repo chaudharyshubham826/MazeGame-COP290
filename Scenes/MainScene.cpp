@@ -6,7 +6,11 @@
 #include "Circle.h"
 #include "Color.h"
 #include "GameController.h"
+#include "App.h"
+
 #include <iostream>
+
+using namespace std;
 
 MainScene::MainScene()
 {
@@ -15,6 +19,9 @@ MainScene::MainScene()
 
 void MainScene::Init()
 {
+    
+    // cout << temp << endl;
+
     ButtonAction action;
     action.key = GameController::ActionKey();
     action.action = [](uint32_t dt, InputState state)
@@ -22,6 +29,7 @@ void MainScene::Init()
         if(GameController::IsPressed(state))
         {
             std::cout << "Action button was pressed!" << std::endl;
+            std::cout << "it works" << std::endl;
         }
     };
 
@@ -41,7 +49,7 @@ void MainScene::Init()
     aGameController.AddMouseButtonAction(mouseAction);
 
     aGameController.SetMouseMovedAction([](const MousePosition& mousePosition){
-		std::cout << "Mouse position x: " << mousePosition.xPos << ", y: " << mousePosition.yPos << std::endl;
+		// std::cout << "Mouse position x: " << mousePosition.xPos << ", y: " << mousePosition.yPos << std::endl;
 	});
 }
 
@@ -51,14 +59,15 @@ void MainScene::Update(uint32_t dt)
 }
 void MainScene::Draw(Screen& screen)
 {
-    Line2D line = {Vec2D(0, 0), Vec2D(screen.Width(), screen.Height())};
-    Triangle trngl = {Vec2D(60, 10), Vec2D(10, 60), Vec2D(110, 60)};
-    AARectangle rect = {Vec2D(10, 70), Vec2D(120, 120)};
-    Circle circle = {Vec2D(150, 150), 50.0f};
+    const BitmapFont& font = App::Singleton().GetFont();
 
-    screen.Draw(trngl, Color::Green(), true, Color::Green());
-    screen.Draw(rect, Color::Blue(), true, Color::Blue());
-    screen.Draw(circle, Color(0, 255, 0, 0), true, Color(0, 255, 0, 0));
+	AARectangle rect = {Vec2D::Zero, App::Singleton().Width(), App::Singleton().Height()};
+
+	Vec2D textDrawPosition;
+
+	textDrawPosition = font.GetDrawPosition(GetSceneName(), rect, BFXA_CENTER, BFYA_CENTER);
+
+	screen.Draw(font, GetSceneName(), textDrawPosition, Color::Blue());
 }
 
 const std::string& MainScene::GetSceneName() const

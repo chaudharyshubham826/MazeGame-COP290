@@ -7,6 +7,7 @@
 #include <memory>
 #include "Scene.h"
 #include "InputController.h"
+#include "BitmapFont.h"
 
 struct SDL_Window;
 
@@ -24,12 +25,18 @@ public:
     void PopScene();
     Scene* TopScene();
 
+    static const std::string& GetBasePath();
+
+    inline const BitmapFont& GetFont() const {return aFont;}
+
 private:
     Screen aScreen;
     SDL_Window* aWindow;
 
     std::vector<std::unique_ptr<Scene>> aSceneStack;////////////////////////////
     InputController aInputController;
+
+    BitmapFont aFont;
 };
 
 

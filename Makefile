@@ -1,10 +1,10 @@
-include_libs = -I/home/shubham/Desktop/COP_Task2_MI/Utils -I/home/shubham/Desktop/COP_Task2_MI/Graphics -I/home/shubham/Desktop/COP_Task2_MI/Shapes -I/home/shubham/Desktop/COP_Task2_MI/App -I/home/shubham/Desktop/COP_Task2_MI/Scenes -I/home/shubham/Desktop/COP_Task2_MI/Input
+include_libs = -I/home/shubham/Desktop/COPTask2MI/Utils -I/home/shubham/Desktop/COPTask2MI/Graphics -I/home/shubham/Desktop/COPTask2MI/Shapes -I/home/shubham/Desktop/COPTask2MI/App -I/home/shubham/Desktop/COPTask2MI/Scenes -I/home/shubham/Desktop/COPTask2MI/Input -I/home/shubham/Desktop/COPTask2MI/Games
 
 LINKER_FLAGS = -lSDL2
 
 OBJ_NAME = exec
 
-main_objects = Vec2D.o Utils.o Color.o ScreenBuffer.o Screen.o Line2D.o Shape.o Triangle.o AARectangle.o Circle.o App.o MainScene.o GameController.o InputController.o main.o
+main_objects = Vec2D.o Utils.o Color.o ScreenBuffer.o Screen.o Line2D.o Shape.o Triangle.o AARectangle.o Circle.o App.o MainScene.o GameController.o InputController.o FileCommandLoader.o BMPImage.o SpriteSheet.o BitmapFont.o main.o
 
 
 all : $(main_objects)
@@ -62,5 +62,16 @@ GameController.o: Input/GameController.cpp
 InputController.o: Input/InputController.cpp
 	g++ $(include_libs) -c Input/InputController.cpp
 
+FileCommandLoader.o: Utils/FileCommandLoader.cpp
+	g++ $(include_libs) -c Utils/FileCommandLoader.cpp
+
+BMPImage.o: Graphics/BMPImage.cpp
+	g++ $(include_libs) -c Graphics/BMPImage.cpp
+
+SpriteSheet.o: Graphics/SpriteSheet.cpp
+	g++ $(include_libs) -c Graphics/SpriteSheet.cpp
+
+BitmapFont.o: Graphics/BitmapFont.cpp
+	g++ $(include_libs) -c Graphics/BitmapFont.cpp
 
 
