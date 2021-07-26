@@ -8,11 +8,15 @@
 #include "GameController.h"
 #include "App.h"
 
+#include "NotImplementedScene.h"
+
+// #include ""
+
 #include <iostream>
 
 using namespace std;
 
-MainScene::MainScene()
+MainScene::MainScene(): ButtonOptionsScene({"Tetris", "Pac-man"}, Color::Yellow())
 {
 
 }
@@ -20,54 +24,38 @@ MainScene::MainScene()
 void MainScene::Init()
 {
     
-    // cout << temp << endl;
+    std::vector<Button::ButtonAction> actions;
 
-    ButtonAction action;
-    action.key = GameController::ActionKey();
-    action.action = [](uint32_t dt, InputState state)
-    {
-        if(GameController::IsPressed(state))
-        {
-            std::cout << "Action button was pressed!" << std::endl;
-            std::cout << "it works" << std::endl;
-        }
-    };
-
-    aGameController.AddInputActionForKey(action);
-
-    MouseButtonAction mouseAction;
-    mouseAction.mouseButton = GameController::LeftMouseButton();
-
-    mouseAction.mouseInputAction = [](InputState state, const MousePosition& position)
-    {
-        if(GameController::IsPressed(state))
-        {
-            std::cout << "Left mouse button pressed!" <<std::endl;
-        }
-    };
-
-    aGameController.AddMouseButtonAction(mouseAction);
-
-    aGameController.SetMouseMovedAction([](const MousePosition& mousePosition){
-		// std::cout << "Mouse position x: " << mousePosition.xPos << ", y: " << mousePosition.yPos << std::endl;
+	actions.push_back([this]{
+		App::Singleton().PushScene(GetScene(TETRIS));
 	});
+
+	actions.push_back([this]{
+		App::Singleton().PushScene(GetScene(PACMAN));
+	});
+
+	SetButtonActions(actions);
+
+	ButtonOptionsScene::Init();
+
+    // temp
+    {
+        aSpriteSheet.Load("PacmanSprites");
+        aAnimatedSprite.Init(App::Singleton().GetBasePath() + "Assets/Pacman_animations.txt", aSpriteSheet);
+        
+        aAnimatedSprite.SetAnimation("move_right", true);
+    }
 }
 
 void MainScene::Update(uint32_t dt)
 {
-
+    aAnimatedSprite.Update(dt);
 }
 void MainScene::Draw(Screen& screen)
 {
-    const BitmapFont& font = App::Singleton().GetFont();
+    ButtonOptionsScene::Draw(screen);
 
-	AARectangle rect = {Vec2D::Zero, App::Singleton().Width(), App::Singleton().Height()};
-
-	Vec2D textDrawPosition;
-
-	textDrawPosition = font.GetDrawPosition(GetSceneName(), rect, BFXA_CENTER, BFYA_CENTER);
-
-	screen.Draw(font, GetSceneName(), textDrawPosition, Color::Blue());
+    aAnimatedSprite.Draw(screen);
 }
 
 const std::string& MainScene::GetSceneName() const
@@ -91,13 +79,9 @@ std::unique_ptr<Scene> MainScene::GetScene(eGame game)
 
         }
         break;
-        default:
-        {
-
-        }
-        break;
     }
 
-    return nullptr;
+    std::unique_ptr<Scene> notImplementedScene = std::make_unique<NotImplementedScene>();
 
+	return notImplementedScene;
 }

@@ -14,3 +14,6 @@ App.o
 MainScene.o
 GameController.o
 InputController.o
+AnimatedSprite.o
+Animation.o
+*.o

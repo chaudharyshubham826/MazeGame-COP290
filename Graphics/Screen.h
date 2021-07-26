@@ -6,6 +6,7 @@
 #include "ScreenBuffer.h"
 #include "Color.h"
 #include <string>
+#include <functional>
 
 class Vec2D;
 class Line2D;
@@ -19,13 +20,17 @@ class SpriteSheet;
 class Sprite;
 class BitmapFont;
 
+struct SDL_Renderer;
+struct SDL_PixelFormat;
+struct SDL_Texture;
+
 
 class Screen{
 public:
     Screen();
     ~Screen();
 
-    SDL_Window* Init(uint32_t w, uint32_t h, uint32_t mag);
+    SDL_Window* Init(uint32_t w, uint32_t h, uint32_t mag, bool fast = true);
     void SwapScreens();
 
     inline void SetClearColor(const Color& color) {aClearColor = color;}
@@ -51,7 +56,10 @@ private:
     Screen& operator=(const Screen& screen);
 
     void ClearScreen();
-    void PolyFill(const std::vector<Vec2D>& points, const Color& color);
+
+    using FillPolyFunc = std::function<Color (uint32_t x, uint32_t y)>;
+
+    void PolyFill(const std::vector<Vec2D>& points, FillPolyFunc func);
 
     uint32_t aWidth;
     uint32_t aHeight;
@@ -61,6 +69,11 @@ private:
 
     SDL_Window* aWindow;
     SDL_Surface* aSurface;
+
+    SDL_Renderer* aRenderer;
+	SDL_PixelFormat* aPixelFormat;
+	SDL_Texture* aTexture;
+	bool aFast;
 
 };
 

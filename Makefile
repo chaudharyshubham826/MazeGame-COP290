@@ -4,7 +4,7 @@ LINKER_FLAGS = -lSDL2
 
 OBJ_NAME = exec
 
-main_objects = Vec2D.o Utils.o Color.o ScreenBuffer.o Screen.o Line2D.o Shape.o Triangle.o AARectangle.o Circle.o App.o MainScene.o GameController.o InputController.o FileCommandLoader.o BMPImage.o SpriteSheet.o BitmapFont.o main.o
+main_objects = Vec2D.o Utils.o Color.o ScreenBuffer.o Screen.o Line2D.o Shape.o Triangle.o AARectangle.o Circle.o App.o MainScene.o GameController.o InputController.o FileCommandLoader.o BMPImage.o SpriteSheet.o BitmapFont.o Button.o ButtonOptionsScene.o NotImplementedScene.o Animation.o AnimationPlayer.o AnimatedSprite.o main.o
 
 
 all : $(main_objects)
@@ -74,4 +74,20 @@ SpriteSheet.o: Graphics/SpriteSheet.cpp
 BitmapFont.o: Graphics/BitmapFont.cpp
 	g++ $(include_libs) -c Graphics/BitmapFont.cpp
 
+Button.o: App/Button.cpp
+	g++ $(include_libs) -c App/Button.cpp
 
+ButtonOptionsScene.o: Scenes/ButtonOptionsScene.cpp
+	g++ $(include_libs) -c Scenes/ButtonOptionsScene.cpp
+
+NotImplementedScene.o: Scenes/NotImplementedScene.cpp
+	g++ $(include_libs) -c Scenes/NotImplementedScene.cpp
+
+Animation.o: Graphics/Animation.cpp
+	g++ $(include_libs) -c Graphics/Animation.cpp
+
+AnimationPlayer.o: Graphics/AnimationPlayer.cpp
+	g++ $(include_libs) -c Graphics/AnimationPlayer.cpp
+
+AnimatedSprite.o: Graphics/AnimatedSprite.cpp
+	g++ $(include_libs) -c Graphics/AnimatedSprite.cpp

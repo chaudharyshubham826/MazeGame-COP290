@@ -1,7 +1,8 @@
 #ifndef SCENES_MAINSCENE_H_
 #define SCENES_MAINSCENE_H_
 
-#include "Scene.h"
+#include "ButtonOptionsScene.h"
+#include "AnimatedSprite.h"
 #include <memory>
 
 enum eGame
@@ -13,7 +14,7 @@ enum eGame
 
 class Screen;
 
-class MainScene: public Scene
+class MainScene: public ButtonOptionsScene
 {
 public:
     MainScene();
@@ -25,7 +26,10 @@ public:
 private:
     std::unique_ptr<Scene> GetScene(eGame game);
 
-    
+    // temp
+    AnimatedSprite aAnimatedSprite;
+    SpriteSheet aSpriteSheet;
+
 };
 
 
