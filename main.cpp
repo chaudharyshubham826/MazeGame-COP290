@@ -17,8 +17,6 @@ int main(int argc, char* argv[])
     }
 
     //screen.Draw(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, Color::Red());
-
-
     return 0;
 }
 

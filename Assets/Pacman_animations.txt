@@ -66,4 +66,3 @@ pac_man_death_7
 pac_man_death_8
 pac_man_explosion
 pac_man_empty
-

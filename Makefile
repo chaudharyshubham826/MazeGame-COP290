@@ -1,10 +1,10 @@
-include_libs = -I/home/shubham/Desktop/COPTask2MI/Utils -I/home/shubham/Desktop/COPTask2MI/Graphics -I/home/shubham/Desktop/COPTask2MI/Shapes -I/home/shubham/Desktop/COPTask2MI/App -I/home/shubham/Desktop/COPTask2MI/Scenes -I/home/shubham/Desktop/COPTask2MI/Input -I/home/shubham/Desktop/COPTask2MI/Games
+include_libs = -I/home/shubham/Desktop/COPTask2MI/Utils -I/home/shubham/Desktop/COPTask2MI/Graphics -I/home/shubham/Desktop/COPTask2MI/Shapes -I/home/shubham/Desktop/COPTask2MI/App -I/home/shubham/Desktop/COPTask2MI/Scenes -I/home/shubham/Desktop/COPTask2MI/Input -I/home/shubham/Desktop/COPTask2MI/Games -I/home/shubham/Desktop/COPTask2MI/Games/Pacman -I/home/shubham/Desktop/COPTask2MI/Scenes/Pacman
 
 LINKER_FLAGS = -lSDL2
 
 OBJ_NAME = exec
 
-main_objects = Vec2D.o Utils.o Color.o ScreenBuffer.o Screen.o Line2D.o Shape.o Triangle.o AARectangle.o Circle.o App.o MainScene.o GameController.o InputController.o FileCommandLoader.o BMPImage.o SpriteSheet.o BitmapFont.o Button.o ButtonOptionsScene.o NotImplementedScene.o Animation.o AnimationPlayer.o AnimatedSprite.o main.o
+main_objects = Vec2D.o Utils.o Color.o ScreenBuffer.o Screen.o Line2D.o Shape.o Triangle.o AARectangle.o Circle.o App.o MainScene.o GameController.o InputController.o FileCommandLoader.o BMPImage.o SpriteSheet.o BitmapFont.o Button.o ButtonOptionsScene.o NotImplementedScene.o Animation.o AnimationPlayer.o AnimatedSprite.o PacmanStartScene.o Excluder.o Actor.o Ghost.o GhostAI.o Pacman.o PacmanGame.o PacmanGameUtils.o PacmanLevel.o GameScene.o main.o
 
 
 all : $(main_objects)
@@ -91,3 +91,33 @@ AnimationPlayer.o: Graphics/AnimationPlayer.cpp
 
 AnimatedSprite.o: Graphics/AnimatedSprite.cpp
 	g++ $(include_libs) -c Graphics/AnimatedSprite.cpp
+
+PacmanStartScene.o: Scenes/Pacman/PacmanStartScene.cpp
+	g++ $(include_libs) -c Scenes/Pacman/PacmanStartScene.cpp
+
+Excluder.o: Games/Excluder.cpp
+	g++ $(include_libs) -c Games/Excluder.cpp
+
+Actor.o: Games/Pacman/Actor.cpp
+	g++ $(include_libs) -c Games/Pacman/Actor.cpp
+
+Ghost.o: Games/Pacman/Ghost.cpp
+	g++ $(include_libs) -c Games/Pacman/Ghost.cpp
+
+GhostAI.o: Games/Pacman/GhostAI.cpp
+	g++ $(include_libs) -c Games/Pacman/GhostAI.cpp
+
+Pacman.o: Games/Pacman/Pacman.cpp
+	g++ $(include_libs) -c Games/Pacman/Pacman.cpp
+
+PacmanGame.o: Games/Pacman/PacmanGame.cpp
+	g++ $(include_libs) -c Games/Pacman/PacmanGame.cpp
+
+PacmanGameUtils.o: Games/Pacman/PacmanGameUtils.cpp
+	g++ $(include_libs) -c Games/Pacman/PacmanGameUtils.cpp
+
+PacmanLevel.o: Games/Pacman/PacmanLevel.cpp
+	g++ $(include_libs) -c Games/Pacman/PacmanLevel.cpp
+
+GameScene.o: Scenes/GameScene.cpp
+	g++ $(include_libs) -c Scenes/GameScene.cpp

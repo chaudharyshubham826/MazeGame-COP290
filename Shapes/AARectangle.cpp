@@ -52,7 +52,7 @@ bool AARectangle::ContainsPoint(const Vec2D& point) const
     return x && y;
 }
 
-AARectangle AARectangle::Inset(const AARectangle& rect, Vec2D& insets)
+AARectangle AARectangle::Inset(const AARectangle& rect, const Vec2D& insets)
 {
     return AARectangle(rect.GetTopLeftPt() + insets, rect.GetWidth() - 2*insets.GetX(), rect.GetHeight() - 2*insets.GetY());
 }

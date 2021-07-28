@@ -16,6 +16,8 @@ bool StringCompare(const std::string& a, const std::string& b);
 
 float Clamp(float val, float min, float max);
 
+float MillisecondsToSeconds(unsigned int milliseconds);
+
 struct Size
 {
 	unsigned int width = 0, height = 0;

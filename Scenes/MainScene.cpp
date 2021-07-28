@@ -9,6 +9,7 @@
 #include "App.h"
 
 #include "NotImplementedScene.h"
+#include "PacmanStartScene.h"
 
 // #include ""
 
@@ -39,23 +40,17 @@ void MainScene::Init()
 	ButtonOptionsScene::Init();
 
     // temp
-    {
-        aSpriteSheet.Load("PacmanSprites");
-        aAnimatedSprite.Init(App::Singleton().GetBasePath() + "Assets/Pacman_animations.txt", aSpriteSheet);
-        
-        aAnimatedSprite.SetAnimation("move_right", true);
-    }
+    
 }
 
 void MainScene::Update(uint32_t dt)
 {
-    aAnimatedSprite.Update(dt);
+    
 }
 void MainScene::Draw(Screen& screen)
 {
     ButtonOptionsScene::Draw(screen);
 
-    aAnimatedSprite.Draw(screen);
 }
 
 const std::string& MainScene::GetSceneName() const
@@ -76,7 +71,7 @@ std::unique_ptr<Scene> MainScene::GetScene(eGame game)
         
         case PACMAN:
         {
-
+            return std::make_unique<PacmanStartScene>();
         }
         break;
     }

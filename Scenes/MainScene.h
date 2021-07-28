@@ -2,7 +2,6 @@
 #define SCENES_MAINSCENE_H_
 
 #include "ButtonOptionsScene.h"
-#include "AnimatedSprite.h"
 #include <memory>
 
 enum eGame
@@ -25,11 +24,6 @@ public:
 
 private:
     std::unique_ptr<Scene> GetScene(eGame game);
-
-    // temp
-    AnimatedSprite aAnimatedSprite;
-    SpriteSheet aSpriteSheet;
-
 };
 
 

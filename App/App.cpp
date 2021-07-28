@@ -82,11 +82,6 @@ void App::Run()
                 topScene->Draw(aScreen);
             }
 
-            
-            
-
-            
-
             aScreen.SwapScreens();
             
         }
@@ -131,7 +126,7 @@ Scene* App::TopScene()
 const std::string& App::GetBasePath()
 {
 	static std::string basePath = SDL_GetBasePath();
-    cout << basePath << endl;
+    // cout << basePath << endl;
 
 	return basePath;
 }
