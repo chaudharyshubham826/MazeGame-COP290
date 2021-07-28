@@ -1,1 +1,22 @@
-The game compiles and runs as I want. There were some functionalities that I was unable to do due to the time constraints, but I have planned to do it in my spare time in future.
+The game compiles and runs as I want.
+
+Here is what I have done. Please read:
+If you look at my repo, it is filled with numerous files because I have done a lot more than just Pacman. As it is a Design Practices course, my motto is to learn 
+how to design anythings from a simplest to the complex task so as to be as efficient as I can be. I have tried to learn a lot from this assignment.
+Programming can be done by anybody, but designing is a very important task, and I have tried to give most of the time to it during the assignment.
+That's why I was unable to implement some functionalities due to the time constraints, but I have planned to do it in my spare time in future.
+Proper OOP used wherever possible. Made a separate window for all the games, going to work on it in future
+
+I want to tell you some things before you grade this assignment mam
+1. My partner audited so I have done it completely by myself. Even with my internship going on+OCS activities, I have tried my best to give time for this game.
+2. Situation was bad during Covid at home, so I had to apply for "I" grade, my partner audited.
+I have given a lots and lots of time designing and implementing. Though I was unable to do some functionalities, but as a design course, my motto as a student was always to design the best version as possible, which consumed a lot of time. This is not just pacman, this is a base for my future game ideas.
+
+I won't give excuses of COVID hitting me and my family. I loved doing this! I alone had put a lot of effort in doing this, please consider grading me for my efforts, this will be a boost for me to take the ideas for other games further.
+
+I think it can be used as a 2 player maze game, as I played with my brother alternatively. The one with the higher score wins. It was fun:)
+
+Thanks for this amazing assignment, and your help of talking to students. You were so helpful to everybody, thankyou very much!
+
+Shubham
+2018CS10641

@@ -122,25 +122,3 @@ GameScene.o: Scenes/GameScene.cpp
 
 
 # TO-DO
-# 
-# 2. Readme with installation instructions you used on your machine for different libraries and packages (with your OS details). Also all online resource links that you used to learn and get ideas from.
-# 3. A status.txt file with status of the game at time of submission: if it compiles and runs as you want it, just mention that. 
-# 4. 10-15 slides in PDF format describing your game rules, game stages (with screenshot images)
-# adding sounds
-# optional: Simultaneous play
-
-# Partner audited so I have done it completely by myself: during the internship
-# Situation was bad during Covid at home
-
-# Given a lot of time, please give bonus if possible
-# I could have asked to give marks based on A1, but I wanted ti try this assignment
-# Proper OOP using wherever possible. Made a separate window for all the games, going to work on it in future
-# Please give marks for the design, have spend 50% time on it
-# This is not just pacman, this is a base for my future games like tetris and breakout
-
-# i know the functionality is simple. But i think this is a design course, the my motto as a student is to design the best understandable version as possible
-# I won't say excuses like my grandparents had COVID, or I was busy. I loved doing this, and I alone has put a lot of effort in doing this, please consider.
-# Thanks for this amazing assignment, and your help of talking to students, I saw a mail. You have been helpful to everybody(i know via fb), thankyou very much
-
-
-# can be used as a 2 player maze game, as I played with my brother alternatively. The one with the higher score wins
