@@ -41,12 +41,12 @@ bool GameController::IsReleased(InputState state)
 
 InputKey GameController::ActionKey()
 {
-	return static_cast<InputKey>(SDLK_a);
+	return static_cast<InputKey>(SDLK_RETURN);
 }
 
 InputKey GameController::CancelKey()
 {
-	return static_cast<InputKey>(SDLK_s);
+	return static_cast<InputKey>(SDLK_ESCAPE);
 }
 
 InputKey GameController::LeftKey()
