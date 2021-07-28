@@ -2,3 +2,4 @@
 /exec
 *.o
 /*.o
+AARectangle.o
