@@ -122,7 +122,7 @@ GameScene.o: Scenes/GameScene.cpp
 
 
 # TO-DO
-# 1. Fix Pacman not loading
+# 
 # 2. Readme with installation instructions you used on your machine for different libraries and packages (with your OS details). Also all online resource links that you used to learn and get ideas from.
 # 3. A status.txt file with status of the game at time of submission: if it compiles and runs as you want it, just mention that. 
 # 4. 10-15 slides in PDF format describing your game rules, game stages (with screenshot images)
@@ -141,3 +141,6 @@ GameScene.o: Scenes/GameScene.cpp
 # i know the functionality is simple. But i think this is a design course, the my motto as a student is to design the best understandable version as possible
 # I won't say excuses like my grandparents had COVID, or I was busy. I loved doing this, and I alone has put a lot of effort in doing this, please consider.
 # Thanks for this amazing assignment, and your help of talking to students, I saw a mail. You have been helpful to everybody(i know via fb), thankyou very much
+
+
+# can be used as a 2 player maze game, as I played with my brother alternatively. The one with the higher score wins
