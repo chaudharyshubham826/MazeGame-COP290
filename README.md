@@ -1,4 +1,4 @@
-# https---github.com-chaudharyshubham826-Games
+# Maze-Game COP290
 
 PACMAN implementation using SDL2. 
 
